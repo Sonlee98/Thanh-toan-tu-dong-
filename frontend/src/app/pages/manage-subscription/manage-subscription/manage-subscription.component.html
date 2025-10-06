@@ -1,0 +1,45 @@
+<div class="container">
+  <section class="current" *ngIf="current() as cur">
+    <mat-card appearance="outlined">
+      <mat-card-header>
+        <div mat-card-avatar class="avatar"></div>
+        <mat-card-title>Gói hiện tại của bạn</mat-card-title>
+        <mat-card-subtitle>{{ cur.planCode || 'Chưa đăng ký' }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="row">
+          <div>
+            <strong>Ngày hết hạn:</strong>
+            <span>{{ cur.expirationDate ? (cur.expirationDate | date: 'd MMMM, y') : '-' }}</span>
+          </div>
+          <div>
+            <strong>Trạng thái:</strong>
+            <span class="badge" [class.active]="cur.status==='ACTIVE'">{{ cur.status || 'INACTIVE' }}</span>
+          </div>
+          <div>
+            <strong>Thời gian còn lại:</strong>
+            <span>{{ remainingDays() !== null ? remainingDays() + ' ngày' : '-' }}</span>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </section>
+
+  <section class="plans">
+    <h3>Các gói đang mở bán</h3>
+    <div class="grid">
+      <mat-card appearance="outlined" *ngFor="let plan of plans()">
+        <mat-card-title>{{ plan.name }}</mat-card-title>
+        <mat-card-subtitle>{{ plan.price | number }}đ / tháng</mat-card-subtitle>
+        <mat-card-content>
+          <p>{{ plan.description }}</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button color="primary" [disabled]="isActivePlan(plan.code)" (click)="upgrade(plan)">
+            {{ isActivePlan(plan.code) ? 'Đang sử dụng' : 'Nâng cấp' }}
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </section>
+</div>
