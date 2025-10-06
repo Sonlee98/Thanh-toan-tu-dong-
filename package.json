@@ -1,0 +1,12 @@
+{
+  "devDependencies": {
+    "jasmine-core": "^5.11.0"
+  },
+  "dependencies": {
+    "@angular/core": "^20.3.3",
+    "@angular/forms": "^20.3.3",
+    "@angular/material": "^20.2.7",
+    "@angular/router": "^20.3.3",
+    "ngx-ui-loader": "^19.0.0"
+  }
+}
